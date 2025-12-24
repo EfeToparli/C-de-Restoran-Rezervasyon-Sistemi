@@ -27,27 +27,27 @@ struct Rezervasyonlar
 };
 int rezervasyon_sayisi = 0;
 
-struct Rezervasyonlar rezervasyon[10]; // eğer saat 24 ile 6 arası ise sıfırla
+struct Rezervasyonlar rezervasyon[10]; // eÃ°er saat 24 ile 6 arasÃ½ ise sÃ½fÃ½rla
 
-//                              <<<VERİ OKUMA ÇİZME>>>
+//                              <<<VERÃ OKUMA Ã‡ÃZME>>>
 
 void dosya_yaz(char isim[], char sifre[])
-{ // musteri sayısı , musteri bilgileri file yazdır
-    FILE *fp = fopen("veri.txt", "a"); //veri.txt açar yoksa oluşturur "a" amacı append üstüne yazma
+{ // musteri sayÃ½sÃ½ , musteri bilgileri file yazdÃ½r
+    FILE *fp = fopen("veri.txt", "a"); //veri.txt aÃ§ar yoksa oluÃ¾turur "a" amacÃ½ append Ã¼stÃ¼ne yazma
     if (fp)
     {
-        fprintf(fp, "%s %s\n", isim, sifre); // yazdırma
+        fprintf(fp, "%s %s\n", isim, sifre); // yazdÃ½rma
         fclose(fp);
     }
     return;
 }
 
 void dosya_bilgi_al()
-{ // kümeyi doldur program açılınca
+{ // kÃ¼meyi doldur program aÃ§Ã½lÃ½nca
     FILE *fp = fopen("veri.txt", "r");
     if (!fp)
         return;
-        //for loop işlemedi bulunan musteri sayisi bilinmior, scanf bilgi alır
+        //for loop iÃ¾lemedi bulunan musteri sayisi bilinmior, scanf bilgi alÃ½r
     while (fscanf(fp, "%s %s", musteri[musteri_sayisi].isim, musteri[musteri_sayisi].sifre) == 2)
     {
         musteri_sayisi++;
@@ -55,9 +55,9 @@ void dosya_bilgi_al()
     fclose(fp);
 }
 
-//                      <<<giriş işlemleri>>>
+//                      <<<giriÃ¾ iÃ¾lemleri>>>
 
-int giris_index_bul(const char *isim) // şifre bulma olayı
+int giris_index_bul(const char *isim) // Ã¾ifre bulma olayÃ½
 {
     int i;
     for (i = 0; i < musteri_sayisi; i++)
@@ -72,15 +72,15 @@ int giris_index_bul(const char *isim) // şifre bulma olayı
 
 char *giris_isim(char *isim)
 {
-    printf("Lütfen isminizi tanımlayın\n");
+    printf("LÃ¼tfen isminizi tanÃ½mlayÃ½n\n");
 
     fgets(isim, mak_ad, stdin);
-    isim[strcspn(isim, "\n")] = '\0'; // fgetsin aldığı sondaki bitiriciyi silmek
+    isim[strcspn(isim, "\n")] = '\0'; // fgetsin aldÃ½Ã°Ã½ sondaki bitiriciyi silmek
 
-    printf("İsminizi %s olarak algıladık doğru mudur? (Doğru ise 1 yanlış ise 2 tuşlayabilirsiniz)\n", isim);
+    printf("Ãsminizi %s olarak algÃ½ladÃ½k doÃ°ru mudur? (DoÃ°ru ise 1 yanlÃ½Ã¾ ise 2 tuÃ¾layabilirsiniz)\n", isim);
 
     int sayi;
-    char kurban[16]; // geçici depolama
+    char kurban[16]; // geÃ§ici depolama
 
     fgets(kurban, sizeof(kurban), stdin);
     kurban[strcspn(kurban, "\n")] = '\0';
@@ -95,12 +95,12 @@ char *giris_isim(char *isim)
 
 char *giris_sifre(char *sifre)
 {
-    printf("Lütfen şifre tanımlayın ve ya şifrenizi girin\n");
+    printf("LÃ¼tfen Ã¾ifre tanÃ½mlayÃ½n ve ya Ã¾ifrenizi girin\n");
 
     fgets(sifre, mak_sifre, stdin);
     sifre[strcspn(sifre, "\n")] = '\0';
 
-    printf("Şifrenizi %s olarak algıladık doğru mudur? (Doğru ise 1 yanlış ise 2 tuşlayabilirsiniz)\n", sifre);
+    printf("Ãifrenizi %s olarak algÃ½ladÃ½k doÃ°ru mudur? (DoÃ°ru ise 1 yanlÃ½Ã¾ ise 2 tuÃ¾layabilirsiniz)\n", sifre);
 
     int sayi;
     char kurban[16];
@@ -139,29 +139,29 @@ int giris()
     if (index != -1)
     {
         if (strcmp(musteri[index].sifre, sifre) != 0)
-        { // depğilse
+        { // depÃ°ilse
             index = -1;
         }
     }
     else
-    { // yeni müşteri
+    { // yeni mÃ¼Ã¾teri
         giris_yeni(isim, sifre);
         return 0;
     }
 
     if (index == -1)
     {
-        printf("Şifre veya İsim yanlış lütfen tekrar deneyiniz.\n");
+        printf("Ãifre veya Ãsim yanlÃ½Ã¾ lÃ¼tfen tekrar deneyiniz.\n");
         giris();
     }
     else
     {
-        printf("Giriş başarılı, rezervasyona yönlendiriliyorsunuz...\n");
+        printf("GiriÃ¾ baÃ¾arÃ½lÃ½, rezervasyona yÃ¶nlendiriliyorsunuz...\n");
         return 0;
     }
 }
 
-//                          <<REZERVASYON İŞLEMLERİ>>
+//                          <<REZERVASYON ÃÃLEMLERÃ>>
 
 int rezervasyon_saat_musait(int saat, int sigara)
 {
@@ -188,7 +188,7 @@ int rezervasyon_saat_musait(int saat, int sigara)
 
 void rezervasyon_saat_ayarlama(int *rezervasyon_saati, int sigara_tercihi)
 {
-    printf("Lütfen rezervasyon saatinizi girin. Örnek: 0130 (24 saatlik format olarak girin rakamlar için başına 0 ekleyin): ");
+    printf("LÃ¼tfen rezervasyon saatinizi girin. Ã–rnek: 0130 (24 saatlik format olarak girin rakamlar iÃ§in baÃ¾Ã½na 0 ekleyin): ");
 
     char kurban[5];
 
@@ -203,7 +203,7 @@ void rezervasyon_saat_ayarlama(int *rezervasyon_saati, int sigara_tercihi)
 
 void rezervasyon_sigara_ayarlama(int *sigara_tercihi)
 {
-    printf("Sigara içilen alan mı, içilmeyen alan mı tercih edersiniz? (1: İçilen, 2: İçilmeyen): ");
+    printf("Sigara iÃ§ilen alan mÃ½, iÃ§ilmeyen alan mÃ½ tercih edersiniz? (1: ÃÃ§ilen, 2: ÃÃ§ilmeyen): ");
 
     char kurban[4];
 
@@ -223,7 +223,7 @@ void rezervasyon_sigara_ayarlama(int *sigara_tercihi)
 
 void rezervasyon_bebekli_ayarlama(int *bebek_sandalyesi)
 {
-    printf("Bebek sandalyesi ister misiniz? (1: Evet, 2: Hayır): ");
+    printf("Bebek sandalyesi ister misiniz? (1: Evet, 2: HayÃ½r): ");
     char kurban[16];
 
     fgets(kurban, sizeof(kurban), stdin);
@@ -242,12 +242,12 @@ void rezervasyon_bebekli_ayarlama(int *bebek_sandalyesi)
 
 int rezervasyon_onay(int saat, int sigara, int bebekli)
 {
-    printf("Rezervasyonunuz %04d, sigara %s alan, bebek sandalyesi %s olarak kaydedilmiştir.\n",
+    printf("Rezervasyonunuz %04d, sigara %s alan, bebek sandalyesi %s olarak kaydedilmiÃ¾tir.\n",
            saat,
-           (sigara == 1) ? "içilen" : "içilmeyen",
+           (sigara == 1) ? "iÃ§ilen" : "iÃ§ilmeyen",
            (bebekli == 1) ? "var" : "yok");
 
-    printf("Rezervasyonu onaylıyor musunuz? (1: Evet, 2: Hayır): ");
+    printf("Rezervasyonu onaylÃ½yor musunuz? (1: Evet, 2: HayÃ½r): ");
 
     int onay;
     char kurban[16];
@@ -258,7 +258,7 @@ int rezervasyon_onay(int saat, int sigara, int bebekli)
     return onay;
 }
 
-//                              <MAİN>
+//                              <MAÃN>
 
 int main()
 {
@@ -268,11 +268,11 @@ int main()
     
     while (1)
     {
-        printf("Restoranın sesli ve tuşlu komutlu randevu sistemine hoşgelidniz.\n");
+        printf("RestoranÃ½n sesli ve tuÃ¾lu komutlu randevu sistemine hoÃ¾gelidniz.\n");
 
         giris();
 
-        printf("Lütfen, rezervasyon seçiminizi yapın.\n");
+        printf("LÃ¼tfen, rezervasyon seÃ§iminizi yapÃ½n.\n");
         int sigara_tercihi;
         int rezervasyon_saati;
         int bebek_sandalyesi;
@@ -285,13 +285,13 @@ int main()
         onay = rezervasyon_onay(rezervasyon_saati, sigara_tercihi, bebek_sandalyesi);
         if (onay == 1)
         {
-            printf("<<<Rezervasyonunuz onaylandı.>>>\n");
+            printf("<<<Rezervasyonunuz onaylandÃ½.>>>\n");
         }
         else
         {
-            printf("İşlem iptal edildi.\n");
+            printf("ÃÃ¾lem iptal edildi.\n");
         }
-        printf("Bizi tercih ettiğiniz için teşekkür ederiz. İyi günler dileriz.\n\n");
+        printf("Bizi tercih ettiÃ°iniz iÃ§in teÃ¾ekkÃ¼r ederiz. Ãyi gÃ¼nler dileriz.\n\n");
     }
 }
 
